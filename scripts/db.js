@@ -1,4 +1,4 @@
-let menu = [
+let menuList = [
   {
     category: {
       name: "Burger",
