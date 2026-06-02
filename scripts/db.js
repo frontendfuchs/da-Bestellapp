@@ -2,7 +2,7 @@ let menuList = [
   {
     category: {
       name: "Burger",
-      src: "./assets/icons/seperator-burger-icon.svg",
+      src: "./assets/icons/burger-icon.png",
       alt: "burger-icon",
     },
 
@@ -44,7 +44,7 @@ let menuList = [
   {
     category: {
       name: "Pizza",
-      src: "./assets/icons/seperator-pizza-icon.svg",
+      src: "./assets/icons/pizza-icon.png",
       alt: "pizza-icon",
     },
 
@@ -83,7 +83,7 @@ let menuList = [
   {
     category: {
       name: "Salad",
-      src: "./assets/icons/seperator-salad-icon.svg",
+      src: "./assets/icons/salad-icon.png",
       alt: "salad-icon",
     },
 

@@ -119,3 +119,7 @@ header {
 }
 
 /* #endregion */
+
+.menu-item {
+  width: 100px;
+}

@@ -4,17 +4,21 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bestellapp</title>
-    <link rel="icon" type="image/x-icon" href="./assets/icons/menu-icon-white.png" />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="./assets/icons/menu-icon-white.png"
+    />
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="./styles/fonts.css" />
     <link rel="stylesheet" href="./styles/assets.css" />
     <link rel="stylesheet" href="./styles/basket.css" />
     <link rel="stylesheet" href="./styles/standard.css" />
     <script src="./scripts/db.js" defer></script>
-    <script src="script.js" defer></script>
     <script src="./scripts/template.js" defer></script>
+    <script src="script.js" defer></script>
   </head>
-  <body>
+  <body onload="render()">
     <header>
       <div class="header-top-left">
         <img
@@ -25,36 +29,70 @@
       </div>
     </header>
     <main class="main-content">
-        <div class="content">
-            <section class="hero-section">
-                <img class="hero-img" src="./assets/img/header-image.jpg" alt="pizza on a table"/>
-                <img class="hero-icon" src="./assets/icons/main-icon.png" alt="burger icon"/>
-            </section>
-            <div class="rating-box">
-                <img src="./assets/icons/star.png" alt="star for rating box ">
-                <p class="rating"><strong>4,1</strong></p>
-                <p class="rewiev">(317)</p>
-            </div>
-            <div class="intro-text">
-                <h1><span class="burger">Burger</span><span>House</span></h1>
-                <p>The best of Burgers, Pizza, and Greens, all in one great place</p>
-            </div>
+      <div class="content">
+        <section class="hero-section">
+          <img
+            class="hero-img"
+            src="./assets/img/header-image.jpg"
+            alt="pizza on a table"
+          />
+          <img
+            class="hero-icon"
+            src="./assets/icons/main-icon.png"
+            alt="burger icon"
+          />
+        </section>
+        <div class="rating-box">
+          <img src="./assets/icons/star.png" alt="star for rating box " />
+          <p class="rating"><strong>4,1</strong></p>
+          <p class="rewiev">(317)</p>
         </div>
-        <section id="menu-list"></section>
-        <nav>
-          <ul class="bottom-navigation">
-            <li><a href=""><img src="./assets/icons/home-icon-white.png" alt="home icon navigation"></a></li>
-            <li><a href=""><img src="./assets/icons/person-icon-white.png" alt="profile icon navigation"></a></li>
-            <li><a href=""><img src="./assets/icons/menu-icon-white.png" alt="order icon navigation"></a></li>
-            <li><a href=""><img src="./assets/icons/shopping-cart-icon-white.png" alt="basket icon navigation"></a></li>
-          </ul>
-        </nav>
+        <div class="intro-text">
+          <h1><span class="burger">Burger</span><span>House</span></h1>
+          <p>The best of Burgers, Pizza, and Greens, all in one great place</p>
+        </div>
+      </div>
+      <section id="menu-list">   
+      </section>
+
+      <nav>
+        <ul class="bottom-navigation">
+          <li>
+            <a href=""
+              ><img
+                src="./assets/icons/home-icon-white.png"
+                alt="home icon navigation"
+            /></a>
+          </li>
+          <li>
+            <a href=""
+              ><img
+                src="./assets/icons/person-icon-white.png"
+                alt="profile icon navigation"
+            /></a>
+          </li>
+          <li>
+            <a href=""
+              ><img
+                src="./assets/icons/menu-icon-white.png"
+                alt="order icon navigation"
+            /></a>
+          </li>
+          <li>
+            <a href=""
+              ><img
+                src="./assets/icons/shopping-cart-icon-white.png"
+                alt="basket icon navigation"
+            /></a>
+          </li>
+        </ul>
+      </nav>
     </main>
     <footer>
       <div class="footer-section">
-      <p>Imprint</p>
-      <p>Cookie Preferences</p>
-      <p><strong>©</strong> 2026 BurgerHouse</p>
+        <p>Imprint</p>
+        <p>Cookie Preferences</p>
+        <p><strong>©</strong> 2026 BurgerHouse</p>
       </div>
     </footer>
   </body>
