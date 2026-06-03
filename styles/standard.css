@@ -7,8 +7,7 @@ text-decoration: none;
 position: relative;
 list-style: none;
 font-size: inherit;
-color: inherit;
-font-family: inherit;
+font-family: Palanquin;
 background: initial;
 border: initial;
 }
@@ -21,5 +20,5 @@ border: initial;
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  padding: 10px;
+  padding: 24px;
 }
