@@ -1,4 +1,3 @@
-/* #region header */
 header {
   background-color: #e76c1f;
   color: white;
@@ -16,8 +15,9 @@ header {
 
 /* #endregion */
 
-/* #region HERO SECTION */
 
+
+/* #region HERO SECTION */
 .hero-section {
   width: 100%;
   height: 400px;
@@ -73,37 +73,45 @@ header {
     line-height: 120%;
   }
 }
-
 /* #endregion */
 
-/* #region Bottom-Nav */
 
+
+/* #region Bottom-Nav */
 .bottom-navigation {
   width: 100%;
   height: 78px;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
   align-items: center;
   background-color: #363534;
-  padding: 0px 16px;
+  padding: 0px 16px 0px 16px;
   position: fixed;
   bottom: 0;
+  /* left: 0;
+  right: 0; */
+
+  .bottom-nav-list {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 
   img {
     width: 28px;
     height: 30px;
   }
 }
-
 /* #endregion */
 
-/* #region FOOTER */
 
+
+/* #region FOOTER */
 .footer-section {
   width: 100%;
   height: 128px;
- 
+
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -113,13 +121,91 @@ header {
 
   background-color: #e76c1f;
   color: white;
-   font-size: 18px;
-   font-family: Palanquin;
-  
+  font-size: 18px;
+  font-family: Palanquin;
 }
-
 /* #endregion */
 
+
+
+.categroy-list-wrapper {
+  width: 100%;
+  height: 60px;
+  background-color: #e76c1f;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    width: 58px;
+    position: absolute;
+    top: -45px;
+    z-index: 1;
+  }
+
+  span {
+    font-size: 30px;
+  }
+}
+
+.category-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-top: 55px;
+  font-family: palanquin;
+  font-weight: 700;
+}
+
+.menu-item-wrapper {
+  background-color: #FDEADC;
+  margin-bottom: 24px;
+  border-radius: 16px;
+}
+
 .menu-item {
-  width: 100px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px;
+
+  img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 16px;
+  }
+
+  h2{
+    font-family: "Palanquin";
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 100%;
+  }
+
+  p {
+    font-size: 16px;
+    font-family: "Palanquin";
+    font-weight: 500;
+    color: #363534;
+    line-height: 120%;
+  }
+
+  div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  button {
+    width: 120px;
+    height: 30px;
+    border-radius: 16px;
+    background-color: #FFFFFF;
+    color: #363534;
+    font-size: 16px;
+    font-weight: 600;
+  }
 }
