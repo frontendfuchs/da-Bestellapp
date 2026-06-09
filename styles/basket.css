@@ -2,169 +2,194 @@
   html:has(#myBasket:not(.d-none)) {
     overflow-y: hidden;
   }
-}
 
-/* html:has(#myBasket:not(.d-none)) {
-  overflow-y: hidden;
-} */
+  .d-none {
+    display: none;
+  }
+}
 
 .basket-modal {
   width: 100%;
   position: absolute;
-  top: 90px;
+  top: 0;
+  bottom: 0;
+  height: 100%;
+  z-index: 0;
+}
 
-  @media screen and (min-width: 1024px) {
-    top: 570px;
-  }
+.basket-limit {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  height: 100%;
+  position: relative;
 }
 
 .basket-content {
+  position: absolute;
+  top: 560px;
+  width: 100%;
+  height: calc(100% - 560px);
   display: flex;
   justify-content: flex-end;
+  align-items: flex-start;
+}
 
+#myBasket {
+  z-index: 10;
+  height: 550px;
+  max-width: 343px;
+  width: 100%;
+  position: sticky;
+  top: 0;
+  background-color: #363534;
+  border-radius: 30px;
+  padding: 16px;
+}
+
+@media screen and (min-width: 1024px) {
   #myBasket {
-    z-index: 10;
-    height: 550px;
-    max-width: 343px;
-    width: 100%;
+    width: 435px;
+    height: 650px;
+    border-radius: 30px 0 0 30px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  #myBasket {
+    width: 90%;
+    height: 70dvh;
     position: fixed;
-    top: 10px;
+    top: 15dvh;
     left: 50%;
     transform: translateX(-50%);
-    background-color: #363534;
     border-radius: 30px;
-    padding: 16px;
-
-    @media screen and (min-width: 1024px) {
-      width: 435px;
-      height: 650px;
-      position: sticky;
-      top: 140px;
-      left: auto;
-      right: 0;
-      transform: none;
-      border-radius: 30px 0 0 30px;
-    }
-
-    .basket-header {
-      color: #ffffff;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .basket-btn {
-      width: 35px;
-      color: inherit;
-      font-size: 22px;
-      justify-content: center;
-      align-self: flex-end;
-      padding-right: 16px;
-    }
-
-    h2 {
-      align-self: center;
-      font-size: 28px;
-    }
-
-    #basket-items {
-      width: 100%;
-      height: 250px;
-      overflow-y: scroll;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-
-      scrollbar-width: auto;
-      scrollbar-color: #fdeadc #363534;
-
-       @media screen and (min-width: 1024px) {
-       height: 340px;
   }
-    }
-    
+}
 
-    .basket-item {
-      width: 100%;
-      background-color: #fdeadc;
-      padding: 8px;
-      border-radius: 20px;
-      font-size: 22px;
-      font-weight: bold;
-      line-height: 120%;
-      color: #363534;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 8px;
+.basket-header {
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+}
 
-      .basket-item-info {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-      }
+.basket-btn {
+  width: 35px;
+  color: inherit;
+  font-size: 22px;
+  justify-content: center;
+  align-self: flex-end;
+  padding-right: 16px;
+}
 
-      .basket-item-wrapper {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-      }
-
-      .basket-item-price {
-        align-self: center;
-      }
-    }
-
-    .basket-summary {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 20px;
-      font-weight: semibold;
-      color: white;
-
-      th {
-        text-align: left;
-        padding: 0px 16px;
-      }
-
-      .subtotal-delivery-row {
-        text-align: left;
-      }
-
-      td {
-        text-align: right;
-        padding: 0px 16px;
-      }
-
-      .total-price {
-        border-top: 2px solid white;
-        font-size: 22px;
-      }
-    }
-
-    .basket-footer {
-      display: flex;
-      justify-content: center;
-      padding-top: 18px;
-    }
-
-    button.buy-now-btn {
-      width: 233px;
-      height: 53px;
-      font-size: 20px;
-      background-color: #e76c1f;
-      color: white;
-      font-weight: 600;
-      border-radius: 60px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+@media screen and (min-width: 1024px) {
+  .basket-btn {
+    display: none;
   }
+}
 
-  @media screen and (max-width: 1024px) {
-    .d-none {
-      display: none;
-    }
+h2 {
+  align-self: center;
+  font-size: 28px;
+}
+
+#basket-items {
+  width: 100%;
+  height: 250px;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  scrollbar-width: auto;
+  scrollbar-color: #fdeadc #363534;
+}
+
+@media screen and (min-width: 1024px) {
+  #basket-items {
+    height: 340px;
+  }
+}
+
+.basket-item {
+  width: 100%;
+  background-color: #fdeadc;
+  padding: 8px;
+  border-radius: 20px;
+  font-size: 22px;
+  font-weight: bold;
+  line-height: 120%;
+  color: #363534;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.basket-item .basket-item-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.basket-item .basket-item-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.basket-item .basket-item-price {
+  align-self: center;
+}
+
+.basket-summary {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 20px;
+  font-weight: semibold;
+  color: white;
+}
+
+.basket-summary th {
+  text-align: left;
+  padding: 0px 16px;
+}
+
+.basket-summary .subtotal-delivery-row {
+  text-align: left;
+}
+
+.basket-summary td {
+  text-align: right;
+  padding: 0px 16px;
+}
+
+.basket-summary .total-price {
+  border-top: 2px solid white;
+  font-size: 22px;
+}
+
+.basket-footer {
+  display: flex;
+  justify-content: center;
+  padding-top: 18px;
+}
+
+button.buy-now-btn {
+  width: 233px;
+  height: 53px;
+  font-size: 20px;
+  background-color: #e76c1f;
+  color: white;
+  font-weight: 600;
+  border-radius: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 1024px) {
+  .d-none {
+    display: none;
   }
 }
 
@@ -174,42 +199,42 @@
   margin: auto;
   background-color: #363534;
   border-radius: 30px;
+}
 
-  &::backdrop {
-    background: rgba(51, 51, 51, 0.5);
-  }
+#confirmationDialog::backdrop {
+  background: rgba(51, 51, 51, 0.5);
+}
 
-  .confirmationDialog-wrapper {
-    width: 100%;
-    height: 255px;
-    display: flex;
-    flex-direction: column;
-    background-color: #363534;
-    padding: 26px;
-    text-align: center;
-    color: #ffffff;
+#confirmationDialog .confirmationDialog-wrapper {
+  width: 100%;
+  height: 255px;
+  display: flex;
+  flex-direction: column;
+  background-color: #363534;
+  padding: 26px;
+  text-align: center;
+  color: #ffffff;
+}
 
-    .dialog-top {
-      width: 100%;
-      display: flex;
-      justify-content: flex-end;
+#confirmationDialog .confirmationDialog-wrapper .dialog-top {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
 
-      button {
-        color: #ffffff;
-        font-size: 20px;
-      }
-    }
+#confirmationDialog .confirmationDialog-wrapper .dialog-top button {
+  color: #ffffff;
+  font-size: 20px;
+}
 
-    h2 {
-      font-size: clamp(28px, 4.5dvw, 42px);
-      line-height: 120%;
-    }
+#confirmationDialog .confirmationDialog-wrapper h2 {
+  font-size: clamp(28px, 4.5dvw, 42px);
+  line-height: 120%;
+}
 
-    p {
-      font-size: clamp(22px, 3.2dvw, 29px);
-      line-height: 120%;
-    }
-  }
+#confirmationDialog .confirmationDialog-wrapper p {
+  font-size: clamp(22px, 3.2dvw, 29px);
+  line-height: 120%;
 }
 
 .empty-basket {
@@ -218,19 +243,46 @@
   gap: 70px;
   padding-top: 32px;
   color: #ffffff;
+}
+
+.empty-basket p {
+  font-size: 22px;
+  line-height: 120%;
+  text-align: center;
+  align-self: center;
+}
+
+.empty-basket .empty-basket-img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  align-self: center;
+}
 
 
-  p {
-    font-size: 22px;
-    line-height: 120%;
-    text-align: center;
-    align-self: center;
+ /* Schaltet den Desktop-Wrapper auf Mobile aus,
+     damit er keine Klicks blockiert */
+@media screen and (max-width: 1024px) {
+  .basket-modal {
+    position: static;
+    width: auto;
+    height: auto;
+    top: auto;
+    bottom: auto;
   }
 
-  .empty-basket-img {
-    width: 60px;
-    height: 60px;
-    object-fit: contain;
-    align-self: center;
+   /* Entfernt die feste Breite/Höhe des inneren Wrappers auf Mobile */
+  .basket-limit {
+    width: auto;
+    max-width: none;
+    height: auto;
+    position: static;
+  }
+
+  .basket-content {
+    position: static;
+    width: auto;
+    height: auto;
+    display: block;
   }
 }
