@@ -47,6 +47,10 @@
   padding: 16px;
 }
 
+#myBasket button {
+  cursor: pointer;
+}
+
 @media screen and (min-width: 1024px) {
   #myBasket {
     width: 435px;
@@ -185,6 +189,13 @@ button.buy-now-btn {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.basket-item-controls button,
+.basket-item-controls span,
+.basket-btn,
+.buy-now-btn {
+  cursor: pointer;
 }
 
 @media screen and (max-width: 1024px) {
