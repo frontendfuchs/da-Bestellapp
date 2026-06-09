@@ -117,6 +117,10 @@ function openConfirmationDialog() {
   basket = "";
   renderBasketItems();
   renderBasketSummary();
+
+  setTimeout(() => {
+    confirmationDialogRef.close();
+  }, 5000);
 }
 
 function closeConfirmationDialog() {
