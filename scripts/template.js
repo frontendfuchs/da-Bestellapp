@@ -85,16 +85,16 @@ function getBasketItemTemplate(basketIndex) {
   const item = basket[basketIndex];
   const leftControl =
     item.dishCount === 1
-      ? `<button onclick="removeFromBasket(${basketIndex})" aria-label="Remove item">
+      ? `<button onclick="removeFromBasket(${basketIndex})">
            <img src="./assets/icons/delete.svg" alt="delete button icon">
          </button>`
-      : `<button onclick="decreaseQuantity(${basketIndex})" aria-label="Decrease quantity">
+      : `<button onclick="decreaseQuantity(${basketIndex})">
            <strong>-</strong>
          </button>`;
 
     const topRightDelete =
     item.dishCount > 1
-      ? `<button onclick="removeFromBasket(${basketIndex})" aria-label="Remove item">
+      ? `<button onclick="removeFromBasket(${basketIndex})">
            <img src="./assets/icons/delete.svg" alt="delete button icon">
          </button>` : "";
 

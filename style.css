@@ -322,6 +322,12 @@
   color: #363534;
 }
 
+.menu-item .menu-item-info h2 {
+  margin: 0;
+  align-self: flex-start;
+}
+
+
 @media screen and (min-width: 1024px) {
   .menu-item .menu-item-info h2 {
     font-size: 18px;
