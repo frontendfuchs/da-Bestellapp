@@ -114,6 +114,9 @@ function renderBasketSummary() {
 function openConfirmationDialog() {
   toggleBasket();
   confirmationDialogRef.showModal();
+  basket = "";
+  renderBasketItems();
+  renderBasketSummary();
 }
 
 function closeConfirmationDialog() {
