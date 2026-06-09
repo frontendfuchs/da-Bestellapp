@@ -16,40 +16,45 @@
     <script src="./scripts/db.js" defer></script>
     <script src="./scripts/template.js" defer></script>
     <script src="script.js" defer></script>
-    
   </head>
   <body onload="render()">
     <header class="header-section">
-      <div class="header-top-left">
-        <img
-          src="./assets/icons/Logo-header.png"
-          alt="icon of pape bag and fork"
-        />
-        <div class="header-top-right">
-          <img src="./assets/icons/dehaze.png" alt="placeholder for menu"/>
-        </div>
-      </div>
-    </header>
+  <div class="content header-inner">
+    <div class="header-top-left">
+      <img
+        src="./assets/icons/Logo-header.png"
+        alt="icon of paper bag and fork"
+      />
+    </div>
+
+    <div class="header-top-right">
+      <img
+        src="./assets/icons/dehaze.png"
+        alt="menu icon"
+      />
+    </div>
+  </div>
+</header>
     <main class="main-content">
       <section class="hero-section">
         <img
-        class="hero-img"
-        src="./assets/img/header-image.jpg"
-        alt="pizza on a table"
+          class="hero-img"
+          src="./assets/img/header-image.jpg"
+          alt="pizza on a table"
         />
         <img
-        class="hero-icon"
-        src="./assets/icons/main-icon.png"
-        alt="burger icon"
+          class="hero-icon"
+          src="./assets/icons/main-icon.png"
+          alt="burger icon"
         />
       </section>
       <div class="content">
         <div class="rating-box-wrapper">
-        <div class="rating-box">
-          <img src="./assets/icons/star.png" alt="star for rating box " />
-          <p class="rating"><strong>4,1</strong></p>
-          <p class="rewiev">(317)</p>
-        </div>
+          <div class="rating-box">
+            <img src="./assets/icons/star.png" alt="star for rating box " />
+            <p class="rating"><strong>4,1</strong></p>
+            <p class="rewiev">(317)</p>
+          </div>
         </div>
         <div class="intro-text">
           <h1><span class="burger">Burger</span><span>House</span></h1>
@@ -61,7 +66,7 @@
       <nav class="bottom-navigation">
         <ul class="bottom-nav-list">
           <li>
-            <a href="" 
+            <a href=""
               ><img
                 src="./assets/icons/home-icon-white.png"
                 alt="home icon navigation"
@@ -88,17 +93,19 @@
                 alt="basket icon navigation"
               />
             </button>
-            <div id="basket-count-id"class="basket-count"></div>
+            <div id="basket-count-id" class="basket-count"></div>
           </li>
         </ul>
       </nav>
       <aside id="toggleBasket" class="basket-modal">
-      <div class="basket-content">
-        <div id="myBasket" class="d-none"></div>
-      </div>
-    </aside>
+        <div class="basket-limit">
+          <div class="basket-content">
+            <div id="myBasket" class="d-none"></div>
+          </div>
+        </div>
+      </aside>
     </main>
-    
+
     <dialog id="confirmationDialog">
       <div class="confirmationDialog-wrapper">
         <div class="dialog-top">
@@ -121,5 +128,3 @@
     </footer>
   </body>
 </html>
-
-

@@ -4,10 +4,6 @@
   }
 }
 
-/* html:has(#myBasket:not(.d-none)) {
-  overflow-y: hidden;
-} */
-
 .basket-modal {
   width: 100%;
   position: absolute;
@@ -15,6 +11,12 @@
 
   @media screen and (min-width: 1024px) {
     top: 570px;
+  }
+
+  .basket-limit {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
   }
 }
 
@@ -81,11 +83,10 @@
       scrollbar-width: auto;
       scrollbar-color: #fdeadc #363534;
 
-       @media screen and (min-width: 1024px) {
-       height: 340px;
-  }
+      @media screen and (min-width: 1024px) {
+        height: 340px;
+      }
     }
-    
 
     .basket-item {
       width: 100%;
@@ -222,7 +223,6 @@
   gap: 70px;
   padding-top: 32px;
   color: #ffffff;
-
 
   p {
     font-size: 22px;
