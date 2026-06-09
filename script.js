@@ -1,14 +1,24 @@
-// definition von globale Variablen für die verwendung in verschiedene Funktionen
+// define global variable for the confirmation dialog
+// the dialog element is stored once so it can be reused in different functions
 const confirmationDialogRef = document.getElementById("confirmationDialog");
 
-//initializierungsfunktion für rendern der seite
+
+// initialize the page content on load
+// this function renders all menu categories, the basket content, and the basket counter
+// it acts as the main start function for the application
 function render() {
   renderCategory();
   renderBasket();
   basketCount();
 }
 
-//die funktion rendert alle vorhandenen Menü Kategorien und Gerichte. Aus der JSON Datei werden in eine schleife alle Kategorien durchlaufen und mit hilfe der ermitellte categorieIndex in html template als einzelne elemente hinzugefügt
+
+// render all menu categories on the page
+// first get the main container for the menu section and clear old content
+// then loop through all categories from the global menuList array
+// for each category add the category template to the page
+// after rendering the category itself, call renderDishes()
+// so that all dishes of that category are inserted into the correct category block
 function renderCategory() {
   let categoryRef = document.getElementById("menu-list");
   categoryRef.innerHTML = "";
@@ -24,9 +34,12 @@ function renderCategory() {
   }
 }
 
-//die funktion rendert alle vorhandenen Gerichte. Aus der JSON Datei werden in eine schleife alle Gerichte durchlaufen
-//  und mit hilfe der ermitellte dishesIndex und der categorieIndex, was als übergabeparameter erhalten wird, in html 
-// template als einzelne elemente hinzugefügt
+
+// render all dishes that belong to one specific category
+// categoryIndex is passed from renderCategory() so the function knows
+// which category from the global menuList array should be used
+// the correct HTML container is selected by using the categoryIndex in the id
+// then all dishes of that category are looped through and added one by one to the template
 function renderDishes(categoryIndex) {
   let dishesRef = document.getElementById(`menu-item-wrapper${categoryIndex}`);
   dishesRef.innerHTML = "";
@@ -40,7 +53,11 @@ function renderDishes(categoryIndex) {
   }
 }
 
-//diese Funktion rendert das ganze Inhalt von Warenkorb, dazu gehört die jeweilige Items und die Preisinformationen
+
+// render the complete basket content
+// first clear the basket container and insert the main basket structure template
+// after the basket layout exists in the DOM, render the basket items and the basket summary
+// this function is responsible for building the visible basket area
 function renderBasket() {
   let basketRef = document.getElementById(`myBasket`);
   basketRef.innerHTML = "";
@@ -50,7 +67,11 @@ function renderBasket() {
   renderBasketSummary();
 }
 
-//diese Funktion ruft die basket Klasse "d-none" und mit hilfe des ".toggle" Methode wird die Eigenschaft von none auf display geswitched was dazu führt das das basket angezeigt oder ausgeblendet wird
+
+// show or hide the basket on mobile
+// the function targets the basket element and toggles the class d-none
+// this switches the basket between visible and hidden
+// after that the basket counter is updated again
 function toggleBasket() {
   let openBasketRef = document.getElementById("myBasket");
   openBasketRef.classList.toggle("d-none");
@@ -58,12 +79,19 @@ function toggleBasket() {
   basketCount();
 }
 
-//die Funktion wird aufgerufen beim clicken auf das button "add to basket" von ein Gericht. Beim clicken werden die
-//  categoryIndex und dishIndex der jeweilige Gerichts an der Funktion übergeben um das gewünschte Gericht in eine 
-// globale JSON Liste (basket) hinzuzufügen. Diese Liste wird verwendet um die Gerichte in Basket zu rendern.
-// es wurde eine Schleife implementiert der das ganze Inhalt von Basket ließt , durchläuft um zu prüfen ob das angeclickte gericht bereits in der globale JSON Liste eingetragen ist. Die prüfung erfolgt mit der Vergleich der categorieIndex und dischesIndex da diese 2 eigenschaften eindeutig sind , falls der Vergleich zutrifft dann wird nur der Anzahl von Gericht und Preis erhöht wenn nicht dann wird das Gericht in der Liste hinzugefügt.  
+
+// add a selected dish to the basket
+// categoryIndex and dishesIndex are passed from the clicked add to basket button
+// with these two values we can find the exact dish in the global menuList array
+// then loop through the basket to check whether this exact dish is already stored
+// the comparison is done with categoryIndex and dishesIndex because together
+// they uniquely identify one dish
+// if the dish is already in the basket we only increase its quantity and price
+// and then update the basket view
+// if the dish is not found we push a new basket object into the basket array
 function addToBasket(categoryIndex, dishesIndex) {
   const dishItem = menuList[categoryIndex].dishes[dishesIndex];
+
   for (let basketIndex = 0; basketIndex < basket.length; basketIndex++) {
     if (
       basket[basketIndex].dishCategoryIndex === categoryIndex &&
@@ -87,10 +115,12 @@ function addToBasket(categoryIndex, dishesIndex) {
   updateBasket();
 }
 
-//die Funktion rendert in Basket die Items Inhalte. Dafür wurde eine Schleife gemacht um die jeweilige Einträge in der
-//  globale JSON Basket List in das html Template zu addieren. Es wurde eine Abfrage gemacht um zu prüfen ob in der 
-// Basket Liste irgendwelche Einträge sind, falls nein wird anstatt die Items ein Einkaufswagen symbol angezeigt und 
-// ein text das nichts im Einkaufswagen vorliegt. 
+
+// render all basket item cards inside the basket
+// first select the basket items container and clear old content
+// if the basket array is empty, render the empty basket template instead
+// this shows an icon and a message that no items are in the basket yet
+// if basket entries exist, loop through all items and add one basket item template per entry
 function renderBasketItems() {
   let basketItemsRef = document.getElementById("basket-items");
   basketItemsRef.innerHTML = "";
@@ -105,10 +135,13 @@ function renderBasketItems() {
   }
 }
 
-// diese Funktion rendert die Preisinformation in Basket. An das html Template wird das berechnete Zwischensumme,
-// //Delivery Cost und die Totale Summe als übergabeparameter übergeben. Die Zwischensumme und Total Summe werden in 
-// separaten Funktionen berechnet. Die Lieferkosten wurde in die Globale JSON Liste definiert um Zukunfstorientiert 
-// anpassbar zu sein. Eine Kovertierung von Int to String war notwendig um . mit komma zu ersetzen.
+
+// render the basket summary with subtotal, delivery fee, and total price
+// first get the summary container and calculate all needed values
+// subtotal and total are calculated in separate helper functions
+// deliveryFee is converted to a string so it can be formatted correctly in the template
+// if the basket is empty the summary should not be shown, so the container is cleared
+// otherwise the summary template is inserted with all calculated values
 function renderBasketSummary() {
   let basketSummaryRef = document.getElementById("basket-summary-id");
   const subTotalValue = subTotal();
@@ -119,6 +152,7 @@ function renderBasketSummary() {
     basketSummaryRef.innerHTML = "";
     return;
   }
+
   basketSummaryRef.innerHTML = "";
   basketSummaryRef.innerHTML += getSummaryBasketTemplate(
     subTotalValue,
@@ -127,7 +161,12 @@ function renderBasketSummary() {
   );
 }
 
-//diese Funktion öffnet ein Separates Dialog als Konfirmation für die Bestellung. Ein Timer wurde dazu gesezt für 5 secunden was führt das der Dialog sich automatisch schließt
+
+// open the confirmation dialog after the user finishes the order
+// first close the basket view by calling toggleBasket()
+// then show the modal dialog as an order confirmation
+// afterwards clear the basket data and rerender basket items and summary
+// a timeout is used so the dialog closes automatically after 5 seconds
 function openConfirmationDialog() {
   toggleBasket();
   confirmationDialogRef.showModal();
@@ -140,12 +179,19 @@ function openConfirmationDialog() {
   }, 5000);
 }
 
-//diese Funktion schließt der Dialog 
+
+// close the confirmation dialog manually
+// this is used for the close button inside the dialog
 function closeConfirmationDialog() {
   confirmationDialogRef.close();
 }
 
-// Function to increase the dish counter and price and then reder the basket again
+
+// increase the quantity of one basket item
+// basketIndex tells the function which basket entry should be updated
+// first increase the dishCount value by 1
+// then update the price of that same basket entry
+// after the data change rerender basket items and summary so the UI stays in sync
 function increaseQuantity(basketIndex) {
   basket[basketIndex].dishCount++;
 
@@ -154,14 +200,13 @@ function increaseQuantity(basketIndex) {
   renderBasketSummary();
 }
 
-// Diese Funktion erhöht den Gesamtpreis eines bestimmten Gerichts im Warenkorb.
-// Dazu wird mit Hilfe des basketIndex zuerst der ursprüngliche Einzelpreis des Gerichts
-// aus der globalen Menü-Liste ermittelt. Das ist möglich, weil beim Hinzufügen zum Warenkorb
-// sowohl categoryIndex als auch dishesIndex im Warenkorb-Eintrag gespeichert wurden.
-//
-// Danach wird der aktuelle Gesamtpreis des Gerichts im Warenkorb gelesen,
-// um den ursprünglichen Einzelpreis erhöht und anschließend wieder im Warenkorb gespeichert.
-// Zum Schluss werden die Warenkorb-Einträge und die Preisübersicht neu gerendert.  
+
+// increase the total price of one basket item
+// first read the original single dish price from the global menuList array
+// this works because each basket entry stores its category index and dish index
+// then get the current total price of that basket item
+// add the original single price once more and save the new sum back into the basket
+// finally rerender basket items and basket summary to show the updated values
 function increasePrice(basketIndex) {
   const originalPrice =
     menuList[basket[basketIndex].dishCategoryIndex].dishes[
@@ -177,11 +222,12 @@ function increasePrice(basketIndex) {
   renderBasketSummary();
 }
 
-// Diese Funktion verringert die Anzahl eines Gerichts im Warenkorb.
-// Über den übergebenen basketIndex wird der richtige Eintrag in der globalen
-// basket-Liste gefunden und die Anzahl um 1 reduziert.
-// Anschließend wird auch der Preis dieses Eintrags angepasst und der Warenkorb
-// mit allen sichtbaren Inhalten erneut gerendert.
+
+// decrease the quantity of one basket item
+// basketIndex identifies which basket entry should be changed
+// the item count is reduced by 1
+// after that the total price of that same basket item is also reduced
+// finally the basket content and summary are rerendered to display the change immediately
 function decreaseQuantity(basketIndex) {
   basket[basketIndex].dishCount--;
 
@@ -190,13 +236,12 @@ function decreaseQuantity(basketIndex) {
   renderBasketSummary();
 }
 
-// Diese Funktion reduziert den Gesamtpreis eines bestimmten Gerichts im Warenkorb.
-// Dazu wird der ursprüngliche Einzelpreis des entsprechenden Gerichts erneut aus der
-// globalen Menü-Liste gelesen. Danach wird dieser Wert vom aktuellen Gesamtpreis
-// des Warenkorb-Eintrags abgezogen und das Ergebnis wieder gespeichert.
-//
-// Nach der Preisanpassung werden die Warenkorb-Einträge und die Preisübersicht
-// erneut gerendert, damit die Änderung sofort sichtbar wird.
+
+// decrease the total price of one basket item
+// first get the original single dish price from the global menuList array
+// then subtract that value from the current total dish price stored in the basket
+// save the new reduced price back into the basket entry
+// after updating the data rerender the basket items and the summary
 function decreasePrice(basketIndex) {
   let originalPrice =
     menuList[basket[basketIndex].dishCategoryIndex].dishes[
@@ -212,11 +257,12 @@ function decreasePrice(basketIndex) {
   renderBasketSummary();
 }
 
-// Diese Funktion entfernt einen kompletten Eintrag aus dem Warenkorb.
-// Mit splice() wird anhand des übergebenen basketIndex genau das gewünschte
-// Gericht aus der globalen basket-Liste gelöscht.
-// Danach werden sowohl die Einträge als auch die Preisübersicht neu gerendert,
-// damit der Warenkorb sofort aktualisiert angezeigt wird
+
+// remove one complete item card from the basket
+// basketIndex tells the function which exact basket entry should be deleted
+// splice() removes that entry from the global basket array
+// after removal the basket items and summary are rerendered
+// so the basket view updates immediately
 function removeFromBasket(basketIndex) {
   basket.splice(basketIndex, 1);
 
@@ -224,11 +270,11 @@ function removeFromBasket(basketIndex) {
   renderBasketSummary();
 }
 
-// Diese Funktion berechnet die Zwischensumme aller Gerichte im Warenkorb.
-// Dafür wird eine Variable mit dem Startwert 0 angelegt und anschließend
-// jeder Eintrag der globalen basket-Liste durchlaufen.
-// Der jeweilige Gesamtpreis jedes Gerichts wird dabei auf die Zwischensumme addiert.
-// Am Ende wird die fertige Zwischensumme zurückgegeben.
+
+// calculate the subtotal of all basket items
+// start with 0 and loop through every basket entry
+// for each entry add its current total dishPrice to the subtotal
+// return the final subtotal value so it can be used in the summary
 function subTotal() {
   let subTotal = 0;
   for (const basketItem of basket) {
@@ -237,10 +283,11 @@ function subTotal() {
   return subTotal;
 }
 
-// Diese Funktion berechnet den gesamten Endpreis der Bestellung.
-// Dafür wird zuerst die aktuelle Zwischensumme aller Warenkorb-Einträge berechnet.
-// Anschließend werden die global definierten Lieferkosten zur Zwischensumme addiert.
-// Das Ergebnis wird als gesamter Endpreis zurückgegeben.
+
+// calculate the final total price of the order
+// first get the current subtotal of all basket items
+// then add the globally defined delivery fee to that subtotal
+// return the final result so it can be rendered in the basket summary
 function totalPrice() {
   let subTotalValue = subTotal();
 
@@ -249,10 +296,10 @@ function totalPrice() {
 }
 
 
-// Diese Funktion berechnet die gesamte Anzahl aller Gerichte im Warenkorb.
-// Dazu werden alle dishCount-Werte der vorhandenen Warenkorb-Einträge addiert.
-// Das Ergebnis wird anschließend als Zahl im Warenkorb-Symbol der Navigation angezeigt,
-// damit der Benutzer jederzeit sehen kann, wie viele Artikel aktuell ausgewählt wurden.
+// calculate the total number of selected dishes in the basket
+// loop through all basket entries and add all dishCount values together
+// then render the result inside the basket counter element in the navigation
+// this allows the user to always see how many items are currently in the basket
 function basketCount() {
   let basketDishCount = 0;
   let basketCountRef = document.getElementById(`basket-count-id`);
@@ -263,7 +310,11 @@ function basketCount() {
   basketCountRef.innerHTML = getBasketCountTemplate(basketDishCount);
 }
 
-// Diese Funktion dient als zentrale Aktualisierungsfunktion für den Warenkorb
+
+// central update function for the basket
+// this function is used whenever basket data changes
+// it updates the basket counter, the basket item list, and the basket summary
+// this helps avoid repeating the same render calls in many places
 function updateBasket() {
   basketCount();
   renderBasketItems();
