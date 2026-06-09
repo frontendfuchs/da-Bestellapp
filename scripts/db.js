@@ -124,3 +124,4 @@ let menuList = [
 ];
 
 let basket = [];
+let deliveryFee = 4.99;
