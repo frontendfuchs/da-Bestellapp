@@ -97,9 +97,7 @@ function addToBasket(categoryIndex, dishesIndex) {
       basket[basketIndex].dishCategoryIndex === categoryIndex &&
       basket[basketIndex].dishesIndex === dishesIndex
     ) {
-      basket[basketIndex].dishCount++;
-      increasePrice(basketIndex);
-      updateBasket();
+      increaseQuantity(basketIndex);
       return;
     }
   }
@@ -170,7 +168,7 @@ function renderBasketSummary() {
 function openConfirmationDialog() {
   toggleBasket();
   confirmationDialogRef.showModal();
-  basket = "";
+  basket = [];
   renderBasketItems();
   renderBasketSummary();
 
@@ -191,13 +189,12 @@ function closeConfirmationDialog() {
 // basketIndex tells the function which basket entry should be updated
 // first increase the dishCount value by 1
 // then update the price of that same basket entry
-// after the data change rerender basket items and summary so the UI stays in sync
+// after the data change, the item count and summary will also be updated so the UI stays in sync
 function increaseQuantity(basketIndex) {
   basket[basketIndex].dishCount++;
 
   increasePrice(basketIndex);
-  renderBasketItems();
-  renderBasketSummary();
+  updateBasketItem(basketIndex);
 }
 
 
@@ -206,7 +203,7 @@ function increaseQuantity(basketIndex) {
 // this works because each basket entry stores its category index and dish index
 // then get the current total price of that basket item
 // add the original single price once more and save the new sum back into the basket
-// finally rerender basket items and basket summary to show the updated values
+// finally the item price will be updated
 function increasePrice(basketIndex) {
   const originalPrice =
     menuList[basket[basketIndex].dishCategoryIndex].dishes[
@@ -218,8 +215,7 @@ function increasePrice(basketIndex) {
 
   basket[basketIndex].dishPrice = dishPriceSum;
 
-  renderBasketItems();
-  renderBasketSummary();
+  updateBasketItemPrice(basketIndex);
 }
 
 
@@ -227,13 +223,17 @@ function increasePrice(basketIndex) {
 // basketIndex identifies which basket entry should be changed
 // the item count is reduced by 1
 // after that the total price of that same basket item is also reduced
-// finally the basket content and summary are rerendered to display the change immediately
+// finally the item count and summary are rerendered to display the change immediately
 function decreaseQuantity(basketIndex) {
   basket[basketIndex].dishCount--;
 
+  if (basket[basketIndex].dishCount <= 0) {
+    removeFromBasket(basketIndex);
+    return;
+  }
+
   decreasePrice(basketIndex);
-  renderBasketItems();
-  renderBasketSummary();
+  updateBasketItem(basketIndex);
 }
 
 
@@ -241,7 +241,7 @@ function decreaseQuantity(basketIndex) {
 // first get the original single dish price from the global menuList array
 // then subtract that value from the current total dish price stored in the basket
 // save the new reduced price back into the basket entry
-// after updating the data rerender the basket items and the summary
+// after updating the data, the item price will also be updated
 function decreasePrice(basketIndex) {
   let originalPrice =
     menuList[basket[basketIndex].dishCategoryIndex].dishes[
@@ -253,8 +253,7 @@ function decreasePrice(basketIndex) {
 
   basket[basketIndex].dishPrice = dishPriceSum;
 
-  renderBasketItems();
-  renderBasketSummary();
+  updateBasketItemPrice(basketIndex);
 }
 
 
@@ -266,8 +265,7 @@ function decreasePrice(basketIndex) {
 function removeFromBasket(basketIndex) {
   basket.splice(basketIndex, 1);
 
-  renderBasketItems();
-  renderBasketSummary();
+  updateBasket();
 }
 
 
@@ -318,5 +316,41 @@ function basketCount() {
 function updateBasket() {
   basketCount();
   renderBasketItems();
+  renderBasketSummary();
+}
+
+
+// update the visible quantity of one basket item
+// basketIndex tells the function which exact basket entry should be updated
+// first get the HTML element that displays the current item count
+// the correct element is selected by using the basketIndex in the id
+// then replace its content with the current dishCount value from the basket array
+function updateBasketItemCount(basketIndex) {
+  let basketItemCountRef = document.getElementById(`basket-item-count${basketIndex}`);
+  basketItemCountRef.innerHTML = basket[basketIndex].dishCount;
+}
+
+
+// update the visible price of one basket item
+// basketIndex identifies which basket entry should be updated
+// first get the HTML element that displays the item price
+// then format the current basket item price to two decimal places
+// after that replace the decimal point with a comma and add the euro sign
+// finally insert the formatted price string into the curent element
+function updateBasketItemPrice(basketIndex) {
+  let basketItemPriceRef = document.getElementById(`basket-item-price${basketIndex}`);
+  const basketPrice = basket[basketIndex].dishPrice.toFixed(2).replace(".", ",") +" €"
+
+  basketItemPriceRef.innerHTML = basketPrice;
+}
+
+
+// update one basket item after a quantity change
+// first call the function that increases the quantity of the selected basket item
+// then update the basket counter in the navigation
+// finally render the basket summery
+function updateBasketItem(basketIndex) {
+  updateBasketItemCount(basketIndex);
+  basketCount();
   renderBasketSummary();
 }

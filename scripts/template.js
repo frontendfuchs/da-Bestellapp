@@ -82,37 +82,22 @@ function getEmptyBasketTemplate() {
 }
 
 function getBasketItemTemplate(basketIndex) {
-  const item = basket[basketIndex];
-  const leftControl =
-    item.dishCount === 1
-      ? `<button onclick="removeFromBasket(${basketIndex})">
-           <img src="./assets/icons/delete.svg" alt="delete button icon">
-         </button>`
-      : `<button onclick="decreaseQuantity(${basketIndex})">
-           <strong>-</strong>
-         </button>`;
-
-    const topRightDelete =
-    item.dishCount > 1
-      ? `<button onclick="removeFromBasket(${basketIndex})">
-           <img src="./assets/icons/delete.svg" alt="delete button icon">
-         </button>` : "";
-
   return /*html*/ `
   
     <div class="basket-item">
   <div class="basket-item-info">
     <h3>1 x ${basket[basketIndex].dishName}</h3>
-    ${topRightDelete}
+    <button onclick="removeFromBasket(${basketIndex})"><img src="./assets/icons/delete.svg" alt="delete button icon">
+    </button>  
   </div>
   <div class="basket-item-wrapper">
     <div id="count" class="basket-item-controls">
-   ${leftControl}
-      <span>${basket[basketIndex].dishCount}</span>
+      <button onclick="decreaseQuantity(${basketIndex})"><strong>-</strong></button>
+      <span id="basket-item-count${basketIndex}">${basket[basketIndex].dishCount}</span>
       <button onclick="increaseQuantity(${basketIndex})"><strong>+</strong></button>
     </div>
       <div class="basket-item-price">
-        <p>${basket[basketIndex].dishPrice.toFixed(2).replace(".", ",")} €</p>
+        <p id="basket-item-price${basketIndex}">${basket[basketIndex].dishPrice.toFixed(2).replace(".", ",")} €</p>
       </div>
    </div>
 </div>
